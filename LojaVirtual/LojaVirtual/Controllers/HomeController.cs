@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using LojaVirtual.Models;
 
 namespace LojaVirtual.Controllers
 {
@@ -15,15 +13,41 @@ namespace LojaVirtual.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult ContatoAcao()
+        {
+            string nome = HttpContext.Request.Form["nome"];
+            string email = HttpContext.Request.Form["email"];
+            string texto = HttpContext.Request.Form["texto"];
+
+
+            return new ContentResult
+            {
+                Content = String.Format("Dados Recebidos Com Sucesso!<br/>Nome:{0}<br/>Email:{1}<br/>texto:{2}<br/>", nome, email, texto),
+                ContentType = "text/html"
+            };
+        }
+
+        public IActionResult Contato()
         {
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Login()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
+
+        public IActionResult CadastroCliente()
+        {
+            return View();
+        }
+
+        public IActionResult CarrinhoCompras()
+        {
+            return View();
+        }
+
+
     }
 }
+
