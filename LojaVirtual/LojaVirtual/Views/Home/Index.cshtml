@@ -1,4 +1,6 @@
-﻿
+﻿@model LojaVirtual.Models.NewsletterEmail;
+
+
 @{
 
     ViewData["Title"] = "Index";
@@ -155,3 +157,52 @@
         </div> <!-- row.// -->
     </div>
 </main>
+
+@{
+    /*
+     * Razor - Motor de template do ASP.NET
+     * Html Helper - Interface que proporcia gerar codigo html por meio do C#, isso ajuda na manipulação de informações
+     * entre html e tecnologia asp.net
+    */
+
+    //URL: #Fragmento  (html - links tipo ancora
+
+}
+
+@{ /*@using (Html.BeginForm(null, null, null, FormMethod.Post, false, new { @action = "/home/index#formulario" }))
+     @using (Html.BeginForm("index", "home", FormMethod.Post))*/}
+
+
+
+@using (Html.BeginForm(null, null, null, FormMethod.Post, false, new { @action = @Url.Action("index", "home") + "#formulario" }))
+{
+    <div class="container" id="formulario">
+        <div class="row">
+            <div class="col-sm-8 offset-2">
+                @if (TempData["MSG_S"] != null)
+                {
+                    <p class="alert alert-success">@TempData["MSG_S"]</p>
+                }
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-sm-6 offset-sm-2">
+                <div class="form-group">
+                    <label for="nome">Cadastre seu e-mail para receber promoções</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                        </div>
+                        @Html.EditorFor(m => m.Email, new { htmlAtributes = new { @class = "form-control" } })
+                    </div>
+                    <span style="color: red;">@Html.ValidationMessageFor(m => m.Email)</span>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <button class="subscribe btn btn-primary btn-block" type="submit" style="margin-top: 22px">Cadastre-se</button>
+            </div>
+
+        </div>
+    </div>
+}
